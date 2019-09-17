@@ -4,6 +4,9 @@ Opam plugin for ASDF version manager
 </div>
 <hr />
 
+**_This tool supports Opam 2.0.1 later. More earlier versions are not currently
+supported._**
+
 ## Prerequirements
 
 - Make sure you have the required dependencies installed:
