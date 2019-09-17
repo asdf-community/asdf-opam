@@ -40,7 +40,12 @@ function install_opam() {
     echo "=================================================="
     echo
   ) || (
-    echo "An error occurred! (All temporary files and install directory have been cleaned.)"
+    echo
+    echo "=================================================="
+    echo "An error occurred!"
+    echo "(Temporary files and directory have been cleaned.)"
+    echo "=================================================="
+    echo
     rm -rf $install_path
     exit 1
   )
