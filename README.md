@@ -15,8 +15,10 @@ Opam plugin for ASDF version manager
 
 #### Note
 
-`asdf-opam` is provided as a tool to compile OCaml, then compile and install
-opam. So you don't need to install OCaml before install Opam.
+You don't need to install OCaml before install Opam. because `asdf-opam` is
+provided as a tool to compile OCaml, then compile and install opam. but, this
+tool only installs Opam. so, if you want to install OCaml, use `asdf-ocaml` (or
+Opam).
 
 ## Installation
 
