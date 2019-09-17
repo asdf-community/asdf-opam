@@ -4,6 +4,15 @@ Opam plugin for ASDF version manager
 </div>
 <hr />
 
+## Prerequirements
+
+- Make sure you have the required dependencies installed:
+  - A C++ compiler
+  - GNU make
+  - curl
+  - git
+  - tar
+
 ## Installation
 
 ```bash
