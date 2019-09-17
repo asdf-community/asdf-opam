@@ -18,3 +18,8 @@ Opam plugin for ASDF version manager
 ```bash
 asdf plugin-add opam https://github.com/asdf-ocaml/asdf-opam.git
 ```
+
+## Usage
+
+Check [asdf](https://github.com/asdf-vm/asdf) readme for instructions on how to
+install & manage versions.
