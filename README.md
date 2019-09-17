@@ -13,6 +13,11 @@ Opam plugin for ASDF version manager
   - git
   - tar
 
+#### Note
+
+`asdf-opam` is provided as a tool to compile OCaml, then compile and install
+opam. So you don't need to install OCaml before install Opam.
+
 ## Installation
 
 ```bash
