@@ -1,0 +1,28 @@
+name: Main workflow
+
+on: [push]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+        opam: [2.0.1, 2.0.5]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Install asdf
+        run: |
+          git clone https://github.com/asdf-vm/asdf.git $HOME/asdf
+
+      - name: Install Opam and run test
+        run: |
+          . $HOME/asdf/asdf.sh
+          asdf plugin-add opam $GITHUB_WORKSPACE
+          asdf install opam ${{ matrix.opam }}
+          asdf global opam ${{ matrix.opam }}
+          opam --version
