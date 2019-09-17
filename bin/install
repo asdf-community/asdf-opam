@@ -21,7 +21,7 @@ function install_opam() {
     cd "$distination"
 
     echo "∗ Configuring and Compiling..."
-    make cold CONFIGURE_ARGS="--prefix $install_path" &>log.cold || exit 1
+    make cold CONFIGURE_ARGS="--prefix "$install_path"" &>log.cold || exit 1
 
     echo "∗ Installing..."
     make cold-install &>log.cold-install || exit 1
