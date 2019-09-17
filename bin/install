@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+function install_opam() {
+  local install_type=$1
+  local version=$2
+  local install_path=$3
+
+  local download_url="https://github.com/ocaml/opam/archive/${version}.tar.gz"
+  local file_name="opam-${version}.tar.gz"
+  local tmp_download_dir
+  tmp_download_dir=$(mktemp -d -t opam_build_XXXXXX)
+
+  local source_path="$tmp_download_dir/$file_name"
+  local distination="$tmp_download_dir/dist"
+
+  (
+    echo "∗ Downloading opam source..."
+    curl --silent --location --output "$source_path" -C - "$download_url"
+    mkdir -p "$distination"
+    tar zxf "$source_path" -C "$distination" --strip-components=1
+    cd "$distination"
+
+    echo "∗ Configuring and Compiling..."
+    make cold CONFIGURE_ARGS="--prefix $install_path" &>log.cold || exit 1
+
+    echo "∗ Installing..."
+    make cold-install &>log.cold-install || exit 1
+
+    echo
+    echo "=================================================="
+    echo "Opam $version has been installed!"
+    echo "--------------------------------------------------"
+    echo "Activate globally with:"
+    echo
+    echo "$ asdf global opam $version"
+    echo "--------------------------------------------------"
+    echo "Activate locally in the current folder with:"
+    echo
+    echo "$ asdf local opam $version"
+    echo "=================================================="
+    echo
+  ) || (
+    echo "An error occurred! (All temporary files and install directory have been cleaned.)"
+    rm -rf $install_path
+    exit 1
+  )
+
+  rm -rf "$tmp_download_dir"
+}
+
+install_opam "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
