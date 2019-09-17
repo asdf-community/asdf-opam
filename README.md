@@ -4,6 +4,10 @@ Opam plugin for ASDF version manager
 </div>
 <hr />
 
+[![Main workflow](https://github.com/asdf-ocaml/asdf-opam/workflows/Main%20workflow/badge.svg)](https://github.com/asdf-ocaml/asdf-opam/actions)
+[![License](https://img.shields.io/github/license/asdf-ocaml/asdf-opam?color=brightgreen)](https://github.com/asdf-ocaml/asdf-opam/blob/master/LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+
 **_This tool supports Opam 2.0.1 later. More earlier versions are not currently
 supported._**
 
