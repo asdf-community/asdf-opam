@@ -5,26 +5,23 @@ function install_opam() {
   local version=$2
   local install_path=$3
 
-  local download_url="https://github.com/ocaml/opam/archive/${version}.tar.gz"
-  local file_name="opam-${version}.tar.gz"
-  local tmp_download_dir
-  tmp_download_dir=$(mktemp -d -t opam_build_XXXXXX)
+  local platform
 
-  local source_path="$tmp_download_dir/$file_name"
-  local distination="$tmp_download_dir/dist"
+  if [[ "$OSTYPE" == "linux"* ]]; then
+    platform="x86_64-linux"
+  elif [[ "$OSTYPE" == "darwin"* ]]; then
+    platform="x86_64-darwin"
+  elif [[ "$OSTYPE" == "openbsd"* ]]; then
+    platform="x86_64-openbsd"
+  fi
+
+  local download_url="https://github.com/ocaml/opam/releases/download/${version}/opam-${version}-${platform}"
 
   (
-    echo "∗ Downloading opam source..."
-    curl --silent --location --output "$source_path" -C - "$download_url"
-    mkdir -p "$distination"
-    tar zxf "$source_path" -C "$distination" --strip-components=1
-    cd "$distination"
-
-    echo "∗ Configuring and Compiling..."
-    make cold CONFIGURE_ARGS="--prefix "$install_path"" &>log.cold || exit 1
-
-    echo "∗ Installing..."
-    make cold-install &>log.cold-install || exit 1
+    echo "∗ Downloading and installing opam..."
+    mkdir -p "$install_path/bin"
+    curl --silent --location --output "$install_path/bin/opam" -C - "$download_url"
+    chmod +x "$install_path/bin/opam"
 
     echo
     echo "=================================================="
