@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macOS-latest]
-        opam: [2.0.1, 2.0.5]
+        opam: [1.2.0, 2.0.5]
 
     runs-on: ${{ matrix.os }}
 
@@ -16,8 +16,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Install asdf
-        run: |
-          git clone https://github.com/asdf-vm/asdf.git $HOME/asdf
+        run: git clone https://github.com/asdf-vm/asdf.git $HOME/asdf
 
       - name: Install Opam and run test
         run: |
