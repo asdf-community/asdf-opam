@@ -15,6 +15,13 @@
 # limitations under the License.
 #
 
+set -eo pipefail
+
+function fail() {
+  echo -e "\e[31mFail:\e[m $* 😭"
+  exit 1
+}
+
 function install_opam() {
   local install_type=$1
   local version=$2
@@ -34,9 +41,9 @@ function install_opam() {
 
   (
     echo "∗ Downloading and installing opam..."
-    mkdir -p "$install_path/bin"
-    curl --silent --location --output "$install_path/bin/opam" -C - "$download_url"
-    chmod +x "$install_path/bin/opam"
+    mkdir -p "${install_path}/bin"
+    curl --silent --location --output "${install_path}/bin/opam" -C - "$download_url" || fail "Could not download Opam $version"
+    chmod +x "${install_path}/bin/opam" || fail "Could not find Opam binary"
 
     echo
     echo "=================================================="
@@ -52,17 +59,9 @@ function install_opam() {
     echo "=================================================="
     echo
   ) || (
-    echo
-    echo "=================================================="
-    echo "An error occurred!"
-    echo "(Temporary files and directory have been cleaned.)"
-    echo "=================================================="
-    echo
     rm -rf $install_path
-    exit 1
+    fail "An error occurred"
   )
-
-  rm -rf "$tmp_download_dir"
 }
 
 install_opam "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
