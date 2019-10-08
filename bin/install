@@ -44,20 +44,7 @@ function install_opam() {
     mkdir -p "${install_path}/bin"
     curl --silent --location --output "${install_path}/bin/opam" -C - "$download_url" || fail "Could not download Opam $version"
     chmod +x "${install_path}/bin/opam" || fail "Could not find Opam binary"
-
-    echo
-    echo "=================================================="
-    echo "Opam $version has been installed!"
-    echo "--------------------------------------------------"
-    echo "Activate globally with:"
-    echo
-    echo "$ asdf global opam $version"
-    echo "--------------------------------------------------"
-    echo "Activate locally in the current folder with:"
-    echo
-    echo "$ asdf local opam $version"
-    echo "=================================================="
-    echo
+    echo "The installation was successful!"
   ) || (
     rm -rf $install_path
     fail "An error occurred"
