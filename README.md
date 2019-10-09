@@ -1,6 +1,6 @@
 <div align="center">
 <h1>asdf-opam 📦</h1>
-Opam plugin for ASDF version manager
+Opam plugin for asdf version manager
 </div>
 <hr />
 
