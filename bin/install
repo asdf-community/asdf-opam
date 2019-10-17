@@ -29,15 +29,24 @@ function install_opam() {
 
   local platform
 
-  if [[ "$OSTYPE" == "linux"* ]]; then
-    platform="x86_64-linux"
-  elif [[ "$OSTYPE" == "darwin"* ]]; then
-    platform="x86_64-darwin"
-  elif [[ "$OSTYPE" == "openbsd"* ]]; then
-    platform="x86_64-openbsd"
-  fi
+  case "$OSTYPE" in
+    darwin*) platform="darwin" ;;
+    linux*) platform="linux" ;;
+    openbsd*) platform="openbsd" ;;
+    *) fail "Unsupported platform" ;;
+  esac
 
-  local download_url="https://github.com/ocaml/opam/releases/download/${version}/opam-${version}-${platform}"
+  local architecture
+
+  case "$(uname -m)" in
+    x86_64) architecture="amd64" ;;
+    i686) architecture="i686" ;;
+    armv7l) architecture="armhf" ;;
+    arm | aarch64) architecture="arm64" ;;
+    *) fail "Unsupported architecture" ;;
+  esac
+
+  local download_url="https://github.com/ocaml/opam/releases/download/${version}/opam-${version}-${architecture}-${platform}"
 
   (
     echo "∗ Downloading and installing opam..."
