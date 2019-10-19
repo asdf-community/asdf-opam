@@ -47,12 +47,13 @@ function install_opam() {
   esac
 
   local download_url="https://github.com/ocaml/opam/releases/download/${version}/opam-${version}-${architecture}-${platform}"
+  local source_path="${install_path}/bin/opam"
 
   (
     echo "∗ Downloading and installing opam..."
     mkdir -p "${install_path}/bin"
-    curl --silent --location --output "${install_path}/bin/opam" -C - "$download_url" || fail "Could not download Opam $version"
-    chmod +x "${install_path}/bin/opam" || fail "Could not find Opam binary"
+    curl --silent --location --create-dirs --output "$source_path" "$download_url" || fail "Could not download Opam $version"
+    chmod +x "$source_path" || fail "Could not find Opam binary"
     echo "The installation was successful!"
   ) || (
     rm -rf $install_path
