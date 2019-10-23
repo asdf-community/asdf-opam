@@ -18,7 +18,7 @@ jobs:
       - name: Install asdf
         run: git clone https://github.com/asdf-vm/asdf.git $HOME/asdf
 
-      - name: Install opam and check opam version
+      - name: Install opam and print opam version
         run: |
           . $HOME/asdf/asdf.sh
           asdf plugin-add opam $GITHUB_WORKSPACE
