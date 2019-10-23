@@ -18,7 +18,7 @@ jobs:
       - name: Install asdf
         run: git clone https://github.com/asdf-vm/asdf.git $HOME/asdf
 
-      - name: Install Opam and run test
+      - name: Install opam and check opam version
         run: |
           . $HOME/asdf/asdf.sh
           asdf plugin-add opam $GITHUB_WORKSPACE
@@ -26,8 +26,25 @@ jobs:
           asdf global opam ${{ matrix.opam }}
           opam --version
 
-  shellcheck:
+  test:
+    runs-on: macOS-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Install asdf
+        run: git clone https://github.com/asdf-vm/asdf.git $HOME/asdf
+
+      - name: Test plugin
+        run: |
+          . $HOME/asdf/asdf.sh
+          asdf plugin-add opam $GITHUB_WORKSPACE
+          bats test
+
+  lint:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v1
       - name: Run ShellCheck
