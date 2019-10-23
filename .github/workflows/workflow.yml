@@ -25,3 +25,10 @@ jobs:
           asdf install opam ${{ matrix.opam }}
           asdf global opam ${{ matrix.opam }}
           opam --version
+
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Run ShellCheck
+        run: shellcheck bin/*
