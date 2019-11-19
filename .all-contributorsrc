@@ -15,6 +15,15 @@
         "doc",
         "maintenance"
       ]
+    },
+    {
+      "login": "schutm",
+      "name": "Martin Schut",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1652928?v=4",
+      "profile": "https://gitlab.com/schutm",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
