@@ -34,7 +34,7 @@ install_opam() {
   local platform
 
   case "$OSTYPE" in
-    darwin*) platform="darwin" ;;
+    darwin*) platform="macos" ;;
     linux*) platform="linux" ;;
     openbsd*) platform="openbsd" ;;
     *) fail "Unsupported platform" ;;
