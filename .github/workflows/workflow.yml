@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: asdf_plugin_test
         env:
-          GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_API_TOKEN: ${{ github.token }}
         uses: asdf-vm/actions/plugin-test@v1
         with:
           command: opam --version
