@@ -40,7 +40,7 @@ jobs:
 
       - name: Test plugin
         env:
-          GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_API_TOKEN: ${{ github.token }}
         run: |
           . $HOME/asdf/asdf.sh
           asdf plugin-add opam $GITHUB_WORKSPACE
