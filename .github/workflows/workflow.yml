@@ -37,8 +37,6 @@ jobs:
 
       - name: Test plugin
         run: make test
-        env:
-          GITHUB_API_TOKEN: ${{ github.token }}
 
   lint:
     runs-on: ubuntu-latest
