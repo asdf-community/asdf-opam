@@ -31,7 +31,7 @@ install_opam() {
     x86_64) architecture="x86_64" ;;
     i686) architecture="i686" ;;
     armv7l) architecture="armhf" ;;
-    arm | aarch64) architecture="arm64" ;;
+    arm | arm64 | aarch64) architecture="arm64" ;;
     *) fail "Unsupported architecture" ;;
   esac
 
