@@ -2,10 +2,6 @@
 
 [opam](https://opam.ocaml.org) plugin for asdf version manager
 
-## Build History
-
-[![Build history](https://buildstats.info/github/chart/asdf-community/asdf-opam?branch=master)](https://github.com/asdf-community/asdf-opam/actions)
-
 ## Installation
 
 ```bash
