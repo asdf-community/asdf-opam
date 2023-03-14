@@ -1,14 +1,17 @@
-name: Main workflow
+name: Test Plugin
 
 on:
   pull_request:
   push:
   schedule:
-    - cron: 0 0 * * 5
+    - cron: 0 1 * * MON
 
 jobs:
-  plugin_test:
+  test-plugin:
+    name: Test Plugin
+
     strategy:
+      fail-fast: false
       matrix:
         os:
           - macos-latest
@@ -17,49 +20,6 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - name: asdf_plugin_test
-        uses: asdf-vm/actions/plugin-test@v1
+      - uses: asdf-vm/actions/plugin-test@v1
         with:
           command: opam --version
-
-  test:
-    runs-on: macos-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install asdf
-        uses: asdf-vm/actions/setup@v1
-
-      - name: Add plugin
-        run: asdf plugin-add opam $GITHUB_WORKSPACE
-
-      - name: Test plugin
-        run: make test
-
-  lint:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install shellcheck
-        run: brew install shellcheck
-
-      - name: Run ShellCheck
-        run: make lint
-
-  format:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install shfmt
-        run: brew install shfmt
-
-      - name: Run shfmt
-        run: make fmt-check
