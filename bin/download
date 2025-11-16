@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+current_script_path=${BASH_SOURCE[0]}
+plugin_dir=$(dirname "$(dirname "$current_script_path")")
+
+source "${plugin_dir}/lib/utils.bash"
+
+if [ "$ASDF_INSTALL_TYPE" != "version" ]; then
+  fail "asdf-${TOOL_NAME} supports release installs only"
+fi
+
+mkdir -p "$ASDF_DOWNLOAD_PATH"
+
+resolved_version="$(resolve_version "$ASDF_INSTALL_VERSION")"
+release_file="$ASDF_DOWNLOAD_PATH/$(release_filename "$resolved_version")"
+
+download_release "$resolved_version" "$release_file"
